@@ -1,0 +1,28 @@
+package com.homeworks.second;
+
+
+import com.mysql.cj.jdbc.Driver;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Database {
+    private Connection con;
+    private String HOST = "localhost";
+    private String PORT = "3306";
+    private String DBNAME = "database";
+    private String LOGIN = "root";
+    private String PASS = "root";
+    private Connection getConnection() throws ClassNotFoundException, SQLException {
+        String connectionString = "jdbc:mysql://" + HOST + ":" + PORT + "/" +DBNAME;
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(connectionString,LOGIN, PASS);
+        return con;
+    }
+    public void isConnected() throws SQLException, ClassNotFoundException {
+        con = getConnection();
+        System.out.println(con.isValid(1000));
+
+    }
+}
